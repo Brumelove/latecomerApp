@@ -1,15 +1,23 @@
-package com.exquis.latecomerapp.domain;
+package com.exquis.latecomerapp.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class EmployeeEntity {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+
+public class Employee implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,5 +30,10 @@ public class EmployeeEntity {
     @Column(nullable = false)
     private LocalDateTime employeeTimeOfArrival;
     @Column(nullable = false)
+    @CreationTimestamp
     private LocalDateTime scheduledTimeOfArrival;
+    @Column(nullable = false)
+    private String employeeGbese;
+
+
 }

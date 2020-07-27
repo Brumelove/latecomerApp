@@ -1,5 +1,5 @@
 server:
-  port: 8056
+  port: 8092
   servlet:
     context-path: /latecomer
 
@@ -13,14 +13,15 @@ logging:
 
 spring:
   application:
-    name: cardemo
+    name: latecomer
   datasource:
     url: jdbc:postgresql://localhost:5432/latecomer
     username: brume
     password: brume
 
+
   jpa:
-    hibernate.ddl-auto: validate
+    hibernate.ddl-auto: update
     properties:
       hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
       hibernate.format_sql: false
@@ -29,3 +30,5 @@ spring:
     hibernate.naming:
       implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
       physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+lateComerFine: 7

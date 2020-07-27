@@ -1,38 +1,54 @@
 package com.exquis.latecomerapp.usecase.service;
 
-import com.exquis.latecomerapp.domain.EmployeeEntity;
+import com.exquis.latecomerapp.domain.entity.Employee;
 import com.exquis.latecomerapp.usecase.repository.EmployeeRepo;
 import lombok.extern.slf4j.Slf4j;
-import lombok.val;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
 @Service
 @Slf4j
+
 public class EmployeeService {
-    private final EmployeeRepo employeeRepo;
+    private  EmployeeRepo employeeRepo;
+    @Value("${lateComerFine}")
+    private Integer lateComerFine;
 
     public EmployeeService(EmployeeRepo employeeRepo) {
         this.employeeRepo = employeeRepo;
     }
 
-    public EmployeeEntity createOrUpdateEmployee(EmployeeEntity employeeEntity) {
-        Optional<EmployeeEntity> optionalEmployeeEntity = employeeRepo.findById(employeeEntity.getId());
-        EmployeeEntity employee = new EmployeeEntity();
+
+    public Employee createOrUpdateEmployee(Employee employeeEntity) {
+        Optional<Employee> optionalEmployeeEntity = employeeRepo.findById(employeeEntity.getId());
+        Employee employee ;
 
         if (optionalEmployeeEntity.isPresent()) {
             employee = optionalEmployeeEntity.get();
-        }
+        }  else throw new ResourceNotFoundException("Employee not found for this id");
+
 
         employee.setAddress(employeeEntity.getAddress());
         employee.setEmail(employeeEntity.getEmail());
         employee.setEmployeeTimeOfArrival(employeeEntity.getEmployeeTimeOfArrival());
-        employee.setName(employeeEntity.getName());
+        employee.setEmployeeName(employeeEntity.getEmployeeName());
         employee.setScheduledTimeOfArrival(employeeEntity.getScheduledTimeOfArrival());
+
+        long diff = ChronoUnit.MINUTES.between(employeeEntity.getScheduledTimeOfArrival(), employeeEntity.getEmployeeTimeOfArrival());
+
+
+        employee.setEmployeeGbese(diff * lateComerFine + "$");
+
+
 
 
         return employeeRepo.save(employee);
@@ -41,8 +57,8 @@ public class EmployeeService {
 
 
     public Map<String, Boolean> deleteEmployee(Long employeeId) {
-        Optional<EmployeeEntity> optionalEmployeeEntity = employeeRepo.findById(employeeId);
-        EmployeeEntity employee;
+        Optional<Employee> optionalEmployeeEntity = employeeRepo.findById(employeeId);
+        Employee employee;
 
         if (optionalEmployeeEntity.isPresent()) {
             employee = optionalEmployeeEntity.get();
