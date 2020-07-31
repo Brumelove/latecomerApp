@@ -30,7 +30,6 @@ public class Employee implements Serializable {
     @Column(nullable = false)
     private LocalDateTime employeeTimeOfArrival;
     @Column(nullable = false)
-    @CreationTimestamp
     private LocalDateTime scheduledTimeOfArrival;
     private String employeeGbese;
 

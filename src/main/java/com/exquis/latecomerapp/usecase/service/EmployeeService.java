@@ -39,11 +39,12 @@ public class EmployeeService {
 
         employee.setAddress(employeeEntity.getAddress());
         employee.setEmail(employeeEntity.getEmail());
-        employee.setEmployeeTimeOfArrival(employeeEntity.getEmployeeTimeOfArrival());
         employee.setEmployeeName(employeeEntity.getEmployeeName());
-        employee.setScheduledTimeOfArrival(employeeEntity.getScheduledTimeOfArrival());
+        employee.setScheduledTimeOfArrival(employeeEntity.getScheduledTimeOfArrival());        employee.setEmployeeTimeOfArrival(employeeEntity.getEmployeeTimeOfArrival());
+        employee.setEmployeeTimeOfArrival(employeeEntity.getEmployeeTimeOfArrival());
 
-        long diff = ChronoUnit.MINUTES.between(employeeEntity.getScheduledTimeOfArrival(), employeeEntity.getEmployeeTimeOfArrival());
+
+        long diff = ChronoUnit.MINUTES.between( employeeEntity.getEmployeeTimeOfArrival(), employeeEntity.getScheduledTimeOfArrival());
 
 
         employee.setEmployeeGbese(diff * lateComerFine + "$");
