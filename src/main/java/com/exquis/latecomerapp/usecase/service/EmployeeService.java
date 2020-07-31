@@ -30,11 +30,11 @@ public class EmployeeService {
 
     public Employee createOrUpdateEmployee(Employee employeeEntity) {
         Optional<Employee> optionalEmployeeEntity = employeeRepo.findById(employeeEntity.getId());
-        Employee employee ;
+        Employee employee  = new Employee();
 
         if (optionalEmployeeEntity.isPresent()) {
             employee = optionalEmployeeEntity.get();
-        }  else throw new ResourceNotFoundException("Employee not found for this id");
+        }
 
 
         employee.setAddress(employeeEntity.getAddress());
