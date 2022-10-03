@@ -14,3 +14,5 @@ Check Unit Test for verifying employee fine.
 
 #Swagger latest version is uncompatible with spring Data Rest, although i can find a way to tweak it, It is time taking and   
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/f61abdae2c8a44c78bfdccff022753e9)](https://app.codacy.com/gh/Brumelove/latecomerApp?utm_source=github.com&utm_medium=referral&utm_content=Brumelove/latecomerApp&utm_campaign=Badge_Grade_Settings)
+
