@@ -1,4 +1,4 @@
-Successful senior java position for esquiApp
+Service that checks for late cormers and add fines
 
 mvn clean install
 create your db and insert values from dump.sql to test
